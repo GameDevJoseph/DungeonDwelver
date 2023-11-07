@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = horizontal > 0 ? false : true;
 
         _anim.SetFloat("Horizontal", Mathf.Abs(horizontal));
+        _anim.SetBool("IsJumping", !GroundRaycasting());
         _rb.velocity = new Vector2(horizontal * _playerSpeed, _rb.velocity.y);
     }
 
@@ -49,10 +50,7 @@ public class Player : MonoBehaviour
 
 
         if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
             return true;
-        }
         else
             return false;
     }
