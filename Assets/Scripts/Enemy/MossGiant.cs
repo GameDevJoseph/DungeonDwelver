@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class MossGiant : Enemy
 {
+    Vector3 _currentTarget;
+    bool _turn;
 
-    bool _switch;
+    Animator _anim;
+    SpriteRenderer _renderer;
+
     void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        _currentTarget = pointB.position;
         Attack();
     }
 
@@ -18,16 +25,24 @@ public class MossGiant : Enemy
 
     public override void Update()
     {
-        if(transform.position == pointA.position)
-            _switch = true;
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("MossGiantIdle_anim"))
+            return;
 
-        if (transform.position == pointB.position)
-            _switch = false;
+        var distance = Vector3.Distance(transform.position, _currentTarget);
+        _renderer.flipX = _currentTarget == pointA.position ? true : false;
 
-        if(_switch)
-            transform.position = Vector3.MoveTowards(transform.position,pointB.position, speed * Time.deltaTime);
+        if (distance <= 1f)
+        {
+            _anim.SetTrigger("Idle");
+            _turn = !_turn;
+        }
 
-        if(!_switch)
-            transform.position = Vector3.MoveTowards(transform.position, pointA.position, speed * Time.deltaTime);
+        if (_turn)
+            _currentTarget = pointA.position;
+
+        if (!_turn)
+            _currentTarget = pointB.position;
+
+        transform.position = Vector3.MoveTowards(transform.position, _currentTarget, speed * Time.deltaTime);
     }
 }
