@@ -14,7 +14,7 @@ public class MossGiant : Enemy, IDamagable
 
     public void Damage(int damageAmount)
     {
-
+        Debug.Log("Damaged");
     }
 
 }

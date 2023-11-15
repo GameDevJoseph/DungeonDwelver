@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordArcController : MonoBehaviour
 {
     [SerializeField] GameObject _swordArcSlash;
+    [SerializeField] Attack _attack;
 
     public void EnableSwordArc()
     {
@@ -13,6 +14,9 @@ public class SwordArcController : MonoBehaviour
 
     public void DisableSwordArc()
     {
-        _swordArcSlash.SetActive(false);
+       _attack.EnableAttack();
+       _swordArcSlash.SetActive(false);
     }
+
+   
 }
