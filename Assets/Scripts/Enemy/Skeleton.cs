@@ -15,6 +15,11 @@ public class Skeleton : Enemy, IDamagable
     public override void Movement()
     {
         base.Movement();
+
+        Vector3 direction = _player.transform.position - transform.position;
+
+        if(_anim.GetBool("InCombat"))
+            _renderer.flipX = direction.x > 0 ? false : true;
     }
 
     public void Damage(int damageAmount)
@@ -26,8 +31,6 @@ public class Skeleton : Enemy, IDamagable
 
         _anim.SetBool("InCombat", true);
         _anim.SetTrigger("Hit");
-        
-
 
         if (health < 1)
             Destroy(this.gameObject);

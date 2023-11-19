@@ -68,7 +68,6 @@ public abstract class Enemy : MonoBehaviour
         }
 
         float distanceFromPlayer = Vector3.Distance(transform.position, _player.transform.position);
-        Debug.Log(distanceFromPlayer + transform.name);
 
         if (distanceFromPlayer > 2.0f)
         {
