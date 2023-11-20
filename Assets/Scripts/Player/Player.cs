@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
     Rigidbody2D _rb;
     Animator _anim;
@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject _raycastGroundLocation;
     [SerializeField] SpriteRenderer _swordArcSlashSprite;
+
+    public int health { get ; set ; }
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,8 @@ public class Player : MonoBehaviour
         _anim.SetTrigger("AttackTrigger");
     }
 
-    
-
+    public void Damage(int damageAmount)
+    {
+        Debug.Log("Hit Player" + damageAmount);
+    }
 }
