@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
     [SerializeField] protected int gems;
+    [SerializeField] protected GameObject diamondPrefab;
 
     [SerializeField] protected Transform pointA, pointB;
 
@@ -95,5 +96,18 @@ public abstract class Enemy : MonoBehaviour
 
         if (_anim.GetBool("InCombat"))
             _renderer.flipX = direction.x > 0 ? false : true;
+    }
+
+
+    protected virtual IEnumerator SpawnDiamonds()
+    {
+        while (gems > 0)
+        {
+            var spawnedDiamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity);
+            spawnedDiamond.transform.position += new Vector3(Random.Range(-1.5f, 1.5f), 0, 0);
+            gems--;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return null;
     }
 }

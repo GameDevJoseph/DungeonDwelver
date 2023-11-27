@@ -19,6 +19,11 @@ public class Skeleton : Enemy, IDamagable
 
     public void Damage(int damageAmount)
     {
+        if (_isDead)
+            return;
+
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+            return;
 
         health -= damageAmount;
 
@@ -29,6 +34,7 @@ public class Skeleton : Enemy, IDamagable
         {
             _isDead = true;
             _anim.SetTrigger("Death");
+            StartCoroutine(SpawnDiamonds());
         }
     }
 }

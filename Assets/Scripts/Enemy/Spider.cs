@@ -16,12 +16,16 @@ public class Spider : Enemy, IDamagable
 
     public void Damage(int damageAmount)
     {
+        if (_isDead)
+            return;
+
         health -= damageAmount;
 
         if(health < 1)
         {
             _isDead = true;
             _anim.SetTrigger("Death");
+            StartCoroutine(SpawnDiamonds());
         }
     }
 

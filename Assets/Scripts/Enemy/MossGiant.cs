@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MossGiant : Enemy, IDamagable
 {
-    int IDamagable.health { get ; set; }
+    int IDamagable.health { get; set; }
 
     public override void Init()
     {
@@ -18,6 +18,11 @@ public class MossGiant : Enemy, IDamagable
     }
     public void Damage(int damageAmount)
     {
+        if (_isDead)
+            return;
+
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+            return;
 
         health -= damageAmount;
 
@@ -28,6 +33,7 @@ public class MossGiant : Enemy, IDamagable
         {
             _isDead = true;
             _anim.SetTrigger("Death");
+            StartCoroutine(SpawnDiamonds());
         }
     }
 

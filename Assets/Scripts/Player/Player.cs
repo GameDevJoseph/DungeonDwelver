@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
 {
+
+    [SerializeField] int amountOfDiamonds = 0;
+
+
     Rigidbody2D _rb;
     Animator _anim;
     SpriteRenderer _spriteRenderer;
@@ -19,6 +23,10 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] SpriteRenderer _swordArcSlashSprite;
 
     public int health { get ; set ; }
+    public int AmountOfDiamonds {
+        get { return amountOfDiamonds; }
+        set { amountOfDiamonds = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
