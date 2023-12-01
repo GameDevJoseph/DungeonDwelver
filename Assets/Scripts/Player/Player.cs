@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
 {
-
+    
     [SerializeField] int amountOfDiamonds = 0;
 
 
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IDamagable
     Animator _anim;
     SpriteRenderer _spriteRenderer;
     float _horizontal;
+    bool _isDead;
 
 
     [SerializeField] float _jumpForce = 50f;
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] GameObject _raycastGroundLocation;
     [SerializeField] SpriteRenderer _swordArcSlashSprite;
 
-    public int health { get ; set ; }
+    public int Health { get ; set ; }
     public int AmountOfDiamonds {
         get { return amountOfDiamonds; }
         set { amountOfDiamonds = value; }
@@ -33,12 +34,16 @@ public class Player : MonoBehaviour, IDamagable
     {
         _rb = GetComponent<Rigidbody2D>();   
         _anim = GetComponentInChildren<Animator>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Health = 4;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_isDead)
+            return;
+
         Movement();
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -99,6 +104,21 @@ public class Player : MonoBehaviour, IDamagable
 
     public void Damage(int damageAmount)
     {
-        Debug.Log("Hit Player" + damageAmount);
+        if (_isDead)
+            return;
+        //remove 1 health
+        Health--;
+        UIManager.Instance.UpdateLives(Health);
+        //update UIDisplay
+        if(Health < 1)
+        {
+            _isDead = true;
+            _anim.SetTrigger("Death");
+        }
+        //check death
+        //play dead anim
+
     }
+
+
 }

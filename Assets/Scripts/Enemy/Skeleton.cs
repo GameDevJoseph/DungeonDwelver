@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton : Enemy, IDamagable
 {
-    int IDamagable.health { get; set; }
+    int IDamagable.Health { get; set; }
 
     public override void Init()
     {
