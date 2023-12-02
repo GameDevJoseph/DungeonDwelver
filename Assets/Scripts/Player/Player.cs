@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, IDamagable
     
     [SerializeField] int amountOfDiamonds = 0;
 
+    ControllerInputMobile _input;
 
     Rigidbody2D _rb;
     Animator _anim;
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
+        _input = new ControllerInputMobile();
+        _input.Mobile.Enable();
         _rb = GetComponent<Rigidbody2D>();   
         _anim = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour, IDamagable
 
         Movement();
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (_input.Mobile.Attack.WasPerformedThisFrame())
         {
             Attack();
         }
@@ -56,9 +59,9 @@ public class Player : MonoBehaviour, IDamagable
     {
         Debug.DrawRay(_raycastGroundLocation.transform.position, Vector2.down, Color.green);
 
-        _horizontal = Input.GetAxisRaw("Horizontal");
+        _horizontal = _input.Mobile.Movement.ReadValue<Vector2>().x;
 
-        if (Input.GetKeyDown(KeyCode.Space) && GroundRaycasting())
+        if (_input.Mobile.Jump.WasPerformedThisFrame() && GroundRaycasting())
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
         }
@@ -70,6 +73,14 @@ public class Player : MonoBehaviour, IDamagable
         _anim.SetFloat("Horizontal", Mathf.Abs(_horizontal));
         _anim.SetBool("IsJumping", !GroundRaycasting());
         _rb.velocity = new Vector2(_horizontal * _playerSpeed, _rb.velocity.y);
+    }
+
+    public void Jump()
+    {
+        if(GroundRaycasting())
+        {
+
+        }
     }
 
     public bool GroundRaycasting()
