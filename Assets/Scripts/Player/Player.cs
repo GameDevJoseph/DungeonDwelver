@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, IDamagable
 {
 
     [SerializeField] int amountOfDiamonds = 0;
+    DungeonDwelver _input;
 
 
     Rigidbody2D _rb;
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
+        _input = new DungeonDwelver();
+        _input.Player.Enable();
         _rb = GetComponent<Rigidbody2D>();   
         _anim = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
@@ -41,7 +44,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         Movement();
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(_input.Player.Attack.WasPerformedThisFrame())
         {
             Attack();
         }
@@ -51,9 +54,9 @@ public class Player : MonoBehaviour, IDamagable
     {
         Debug.DrawRay(_raycastGroundLocation.transform.position, Vector2.down, Color.green);
 
-        _horizontal = Input.GetAxisRaw("Horizontal");
+        _horizontal = _input.Player.Move.ReadValue<Vector2>().x;
 
-        if (Input.GetKeyDown(KeyCode.Space) && GroundRaycasting())
+        if (_input.Player.Jump.WasPerformedThisFrame() && GroundRaycasting())
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
         }
