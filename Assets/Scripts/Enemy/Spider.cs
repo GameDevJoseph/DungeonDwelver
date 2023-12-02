@@ -6,7 +6,7 @@ public class Spider : Enemy, IDamagable
 {
     [SerializeField] GameObject _acidPrefab;
 
-    int IDamagable.Health { get ; set ; }
+    int IDamagable.health { get ; set ; }
 
     public override void Init()
     {

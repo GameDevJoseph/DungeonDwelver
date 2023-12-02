@@ -13,7 +13,6 @@ public class Diamond : MonoBehaviour
             if (player != null)
             {
                 player.AmountOfDiamonds++;
-                UIManager.Instance.UpdateGemCount(player.AmountOfDiamonds);
                 Destroy(this.gameObject);
             }
         }

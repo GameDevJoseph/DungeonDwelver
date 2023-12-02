@@ -1,6 +1,6 @@
 public interface IDamagable 
 {
-    int Health { get; set; }
+    int health { get; set; }
     void Damage(int damageAmount);
 
 }

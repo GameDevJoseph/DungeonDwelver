@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Shop : MonoBehaviour
 {
 
     [SerializeField] GameObject _shopPanel;
     [SerializeField] int _currentItemSelected;
     [SerializeField] int _currentItemCost;
-    
+
     Player _player;
 
     public int currentItemSelected { get { return _currentItemSelected; } }
