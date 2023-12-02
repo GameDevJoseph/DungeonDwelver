@@ -70,7 +70,7 @@ public partial class @ControllerInputMobile: IInputActionCollection2, IDisposabl
                 {
                     ""name"": """",
                     ""id"": ""d6d19ae6-4076-41dc-8f48-38a88216dd7a"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<AndroidJoystick>/stick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
