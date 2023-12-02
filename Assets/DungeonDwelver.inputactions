@@ -46,7 +46,7 @@
                 {
                     "name": "",
                     "id": "3ea4d645-4504-4529-b061-ab81934c3752",
-                    "path": "<Touchscreen>/touch1/radius",
+                    "path": "<Joystick>/stick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
@@ -90,10 +90,10 @@
                 {
                     "name": "",
                     "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Touch",
+                    "groups": "Touch;Gamepad;Keyboard&Mouse;Joystick;XR",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -101,10 +101,10 @@
                 {
                     "name": "",
                     "id": "8e812c0c-ee68-4c3d-893e-90012eba168f",
-                    "path": "<Touchscreen>/touch2/tap",
+                    "path": "<Mouse>/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Touch;Keyboard&Mouse;Gamepad;Joystick;XR",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
